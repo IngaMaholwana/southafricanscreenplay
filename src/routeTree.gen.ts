@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FilmsIdRouteImport } from './routes/films.$id'
+import { Route as ApiPublicFilmsImportRouteImport } from './routes/api/public/films/import'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const FilmsIdRoute = FilmsIdRouteImport.update({
   path: '/films/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicFilmsImportRoute = ApiPublicFilmsImportRouteImport.update({
+  id: '/api/public/films/import',
+  path: '/api/public/films/import',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/films/$id': typeof FilmsIdRoute
+  '/api/public/films/import': typeof ApiPublicFilmsImportRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/films/$id': typeof FilmsIdRoute
+  '/api/public/films/import': typeof ApiPublicFilmsImportRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/films/$id': typeof FilmsIdRoute
+  '/api/public/films/import': typeof ApiPublicFilmsImportRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/films/$id'
+  fullPaths: '/' | '/films/$id' | '/api/public/films/import'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/films/$id'
-  id: '__root__' | '/' | '/films/$id'
+  to: '/' | '/films/$id' | '/api/public/films/import'
+  id: '__root__' | '/' | '/films/$id' | '/api/public/films/import'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FilmsIdRoute: typeof FilmsIdRoute
+  ApiPublicFilmsImportRoute: typeof ApiPublicFilmsImportRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FilmsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/films/import': {
+      id: '/api/public/films/import'
+      path: '/api/public/films/import'
+      fullPath: '/api/public/films/import'
+      preLoaderRoute: typeof ApiPublicFilmsImportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FilmsIdRoute: FilmsIdRoute,
+  ApiPublicFilmsImportRoute: ApiPublicFilmsImportRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
