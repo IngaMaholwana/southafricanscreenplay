@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FilmsIdRouteImport } from './routes/films.$id'
 import { Route as ApiPublicFilmsImportRouteImport } from './routes/api/public/films/import'
-import { Route as ApiPublicFilmsSelftestRouteImport } from './routes/api/public/films/selftest'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,57 +28,35 @@ const ApiPublicFilmsImportRoute = ApiPublicFilmsImportRouteImport.update({
   path: '/api/public/films/import',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicFilmsSelftestRoute = ApiPublicFilmsSelftestRouteImport.update({
-  id: '/api/public/films/selftest',
-  path: '/api/public/films/selftest',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/films/$id': typeof FilmsIdRoute
   '/api/public/films/import': typeof ApiPublicFilmsImportRoute
-  '/api/public/films/selftest': typeof ApiPublicFilmsSelftestRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/films/$id': typeof FilmsIdRoute
   '/api/public/films/import': typeof ApiPublicFilmsImportRoute
-  '/api/public/films/selftest': typeof ApiPublicFilmsSelftestRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/films/$id': typeof FilmsIdRoute
   '/api/public/films/import': typeof ApiPublicFilmsImportRoute
-  '/api/public/films/selftest': typeof ApiPublicFilmsSelftestRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/films/$id'
-    | '/api/public/films/import'
-    | '/api/public/films/selftest'
+  fullPaths: '/' | '/films/$id' | '/api/public/films/import'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/films/$id'
-    | '/api/public/films/import'
-    | '/api/public/films/selftest'
-  id:
-    | '__root__'
-    | '/'
-    | '/films/$id'
-    | '/api/public/films/import'
-    | '/api/public/films/selftest'
+  to: '/' | '/films/$id' | '/api/public/films/import'
+  id: '__root__' | '/' | '/films/$id' | '/api/public/films/import'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FilmsIdRoute: typeof FilmsIdRoute
   ApiPublicFilmsImportRoute: typeof ApiPublicFilmsImportRoute
-  ApiPublicFilmsSelftestRoute: typeof ApiPublicFilmsSelftestRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -105,13 +82,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicFilmsImportRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/films/selftest': {
-      id: '/api/public/films/selftest'
-      path: '/api/public/films/selftest'
-      fullPath: '/api/public/films/selftest'
-      preLoaderRoute: typeof ApiPublicFilmsSelftestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -119,7 +89,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FilmsIdRoute: FilmsIdRoute,
   ApiPublicFilmsImportRoute: ApiPublicFilmsImportRoute,
-  ApiPublicFilmsSelftestRoute: ApiPublicFilmsSelftestRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
