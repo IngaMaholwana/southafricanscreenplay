@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { queryOptions } from "@tanstack/react-query";
 import { z } from "zod";
-import type { Database } from "@/integrations/supabase/types";
+import type { Database, Json } from "@/integrations/supabase/types";
 
 export const FILMS_PAGE_SIZE = 24;
 
@@ -51,7 +51,7 @@ export type FilmDetail = {
   imdb_id: string | null;
   wikidata_id: string | null;
   category: string;
-  data: unknown;
+  data: Json;
 };
 
 export type FacetBucket = { name: string; count: number };

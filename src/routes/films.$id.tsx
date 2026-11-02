@@ -215,7 +215,7 @@ function FilmDetailPage() {
             </section>
           )}
 
-          {(crew.directors?.length ?? 0) > 0 && (
+          {(crew["directors"]?.length ?? 0) > 0 && (
             <section>
               <h2 className="font-display text-lg text-primary">Cast &amp; crew</h2>
               <div className="gold-rule mt-2 mb-3" />

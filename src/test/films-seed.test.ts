@@ -9,10 +9,7 @@ import { describe, expect, it } from "vitest";
 const MIGRATION = "supabase/migrations/20261102000000_za_films_seed.sql";
 
 describe("ZA films seed migration", () => {
-  const sql = readFileSync(
-    resolve(fileURLToPath(import.meta.url), `../../${MIGRATION}`),
-    "utf8",
-  );
+  const sql = readFileSync(resolve(process.cwd(), MIGRATION), "utf8");
 
 
   it("contains literal INSERTs for all 974 films", () => {
