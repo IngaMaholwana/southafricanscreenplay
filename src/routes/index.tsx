@@ -149,8 +149,9 @@ function Index() {
             A century of South African stories, on one reel.
           </h1>
           <p className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
-            {facets.total} films from {Math.min(...facets.genres.length ? [1898] : [1898])}
-            {" "}1898 to 2026 — in English, Afrikaans, isiXhosa, isiZulu and more.
+            {facets.total} films from 1898 to 2026 — in English, Afrikaans,
+            isiXhosa, isiZulu and more.
+
           </p>
 
           <form
