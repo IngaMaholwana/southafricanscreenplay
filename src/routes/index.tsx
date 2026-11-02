@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, stripSearchParams, useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
@@ -24,8 +24,22 @@ const searchSchema = z.object({
 
 type SearchOutput = z.output<typeof searchSchema>;
 
+const DEFAULT_SEARCH = {
+  q: "",
+  genres: [],
+  languages: [],
+  formats: [],
+  from: 1896,
+  to: 2026,
+  sort: "newest",
+  page: 1,
+};
+
 export const Route = createFileRoute("/")({
   validateSearch: zodValidator(searchSchema),
+  search: {
+    middlewares: [stripSearchParams(DEFAULT_SEARCH)],
+  },
   loaderDeps: ({ search }) => ({
     q: search.q,
     genres: search.genres,
