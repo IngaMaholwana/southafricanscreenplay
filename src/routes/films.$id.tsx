@@ -79,7 +79,7 @@ const CREW_LABELS: Record<string, string> = {
 };
 
 function asDoc(film: FilmDetail): FilmDoc {
-  return (film.data ?? {}) as FilmDoc;
+  return (film.data ?? {}) as unknown as FilmDoc;
 }
 
 export const Route = createFileRoute("/films/$id")({
