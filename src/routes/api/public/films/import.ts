@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { timingSafeEqual } from "node:crypto";
 import { z } from "zod";
+import type { Json } from "@/integrations/supabase/types";
 
 /**
  * Film import endpoint for the scraping pipeline.
@@ -58,9 +59,22 @@ export const Route = createFileRoute("/api/public/films/import")({
         // Privileged upsert only after the caller is verified; load the
         // service-role client inside the handler, never at module scope.
         const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-        const { error } = await supabaseAdmin
-          .from("films")
-          .upsert(parsed.films, { onConflict: "id" });
+        const rows = parsed.films.map((f) => ({
+          id: f.id,
+          title: f.title,
+          search_title: f.search_title,
+          year: f.year,
+          format: f.format,
+          genres: f.genres,
+          languages: f.languages,
+          runtime_minutes: f.runtime_minutes ?? null,
+          summary: f.summary ?? null,
+          imdb_id: f.imdb_id ?? null,
+          wikidata_id: f.wikidata_id ?? null,
+          category: f.category,
+          data: f.data as unknown as Json,
+        }));
+        const { error } = await supabaseAdmin.from("films").upsert(rows, { onConflict: "id" });
         if (error) {
           console.error("film import failed:", error.message);
           return Response.json({ error: "Import failed" }, { status: 500 });
