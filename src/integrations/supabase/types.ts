@@ -65,6 +65,69 @@ export type Database = {
         }
         Relationships: []
       }
+      series: {
+        Row: {
+          category: string
+          created_at: string
+          data: Json
+          end_year: number | null
+          episodes: number | null
+          format: string
+          genres: string[]
+          id: string
+          imdb_id: string | null
+          languages: string[]
+          runtime_minutes: number | null
+          search_title: string
+          seasons: number | null
+          status: string
+          summary: string | null
+          title: string
+          wikidata_id: string | null
+          year: number
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          data?: Json
+          end_year?: number | null
+          episodes?: number | null
+          format: string
+          genres?: string[]
+          id: string
+          imdb_id?: string | null
+          languages?: string[]
+          runtime_minutes?: number | null
+          search_title: string
+          seasons?: number | null
+          status?: string
+          summary?: string | null
+          title: string
+          wikidata_id?: string | null
+          year: number
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          data?: Json
+          end_year?: number | null
+          episodes?: number | null
+          format?: string
+          genres?: string[]
+          id?: string
+          imdb_id?: string | null
+          languages?: string[]
+          runtime_minutes?: number | null
+          search_title?: string
+          seasons?: number | null
+          status?: string
+          summary?: string | null
+          title?: string
+          wikidata_id?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -8,6 +8,13 @@
       "when": 1793638356515,
       "tag": "0000_za_films_schema",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793691973601,
+      "tag": "0001_create_series_table",
+      "breakpoints": true
     }
   ]
 }
