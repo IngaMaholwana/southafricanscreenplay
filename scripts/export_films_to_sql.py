@@ -118,7 +118,7 @@ def main() -> int:
         )
         for j, row in enumerate(chunk):
             values = ", ".join(row_to_values(row))
-            lines.append(f"  ({values}){',' if j < len(chunk) - 1 else ';'}")
+            lines.append(f"  ({values}){',' if j < len(chunk) - 1 else ''}")
         lines.append(f"ON CONFLICT (id) DO UPDATE SET {UPDATE_SET};")
         lines.append("")
 
