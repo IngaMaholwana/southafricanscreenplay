@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TvRouteImport } from './routes/tv'
 import { Route as FilmsIdRouteImport } from './routes/films.$id'
 import { Route as ApiPublicFilmsImportRouteImport } from './routes/api/public/films/import'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TvRoute = TvRouteImport.update({
+  id: '/tv',
+  path: '/tv',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FilmsIdRoute = FilmsIdRouteImport.update({
@@ -31,30 +37,34 @@ const ApiPublicFilmsImportRoute = ApiPublicFilmsImportRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/tv': typeof TvRoute
   '/films/$id': typeof FilmsIdRoute
   '/api/public/films/import': typeof ApiPublicFilmsImportRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/tv': typeof TvRoute
   '/films/$id': typeof FilmsIdRoute
   '/api/public/films/import': typeof ApiPublicFilmsImportRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/tv': typeof TvRoute
   '/films/$id': typeof FilmsIdRoute
   '/api/public/films/import': typeof ApiPublicFilmsImportRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/films/$id' | '/api/public/films/import'
+  fullPaths: '/' | '/tv' | '/films/$id' | '/api/public/films/import'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/films/$id' | '/api/public/films/import'
-  id: '__root__' | '/' | '/films/$id' | '/api/public/films/import'
+  to: '/' | '/tv' | '/films/$id' | '/api/public/films/import'
+  id: '__root__' | '/' | '/tv' | '/films/$id' | '/api/public/films/import'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TvRoute: typeof TvRoute
   FilmsIdRoute: typeof FilmsIdRoute
   ApiPublicFilmsImportRoute: typeof ApiPublicFilmsImportRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tv': {
+      id: '/tv'
+      path: '/tv'
+      fullPath: '/tv'
+      preLoaderRoute: typeof TvRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/films/$id': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TvRoute: TvRoute,
   FilmsIdRoute: FilmsIdRoute,
   ApiPublicFilmsImportRoute: ApiPublicFilmsImportRoute,
 }
