@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { createFileRoute, Link, Outlet, stripSearchParams, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, stripSearchParams, useNavigate } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
@@ -37,7 +37,7 @@ const DEFAULT_SEARCH = {
   page: 1,
 };
 
-export const Route = createFileRoute("/tv")({
+export const Route = createFileRoute("/tv/")({
   validateSearch: zodValidator(searchSchema),
   search: {
     middlewares: [stripSearchParams(DEFAULT_SEARCH)],
@@ -437,6 +437,3 @@ function SeriesCard({ series }: { series: SeriesSummary }) {
     </Link>
   );
 }
-
-// /tv/$id nests under this route, so the outlet must render here.
-export const TvOutlet = Outlet;
