@@ -82,12 +82,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "A browsable archive of nearly a thousand South African films, 1898 to today. Search by title, genre, language, and year.",
+          "A browsable archive of nearly a thousand South African films and 400 TV series, 1898 to today. Search by title, genre, language, and year.",
       },
       { property: "og:title", content: "Mzansi Film Archive" },
       {
         property: "og:description",
-        content: "Search and explore nearly a thousand South African films, 1898 to today.",
+        content: "Search and explore nearly a thousand South African films and 400 TV series, 1898 to today.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -142,12 +142,20 @@ function RootComponent() {
                 1898–2026
               </span>
             </Link>
-            <Link
-              to="/"
-              className="text-sm text-muted-foreground transition-colors hover:text-primary"
-            >
-              Browse films
-            </Link>
+            <nav className="flex items-center gap-6" aria-label="Catalogues">
+              <Link
+                to="/"
+                className="text-sm text-muted-foreground transition-colors hover:text-primary"
+              >
+                Films
+              </Link>
+              <Link
+                to="/tv"
+                className="text-sm text-muted-foreground transition-colors hover:text-primary"
+              >
+                TV series
+              </Link>
+            </nav>
           </div>
         </header>
         <main className="flex-1">
@@ -156,7 +164,7 @@ function RootComponent() {
         </main>
         <footer className="border-t border-border py-8">
           <div className="mx-auto w-full max-w-6xl px-4 text-xs text-muted-foreground">
-            Mzansi Film Archive — South African cinema, from the first reels of 1898 to today.
+            Mzansi Film Archive — South African cinema and television, from the first reels of 1898 to today.
             Compiled from public film references; verify details before citation.
           </div>
         </footer>

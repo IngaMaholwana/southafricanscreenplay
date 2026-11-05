@@ -9,6 +9,7 @@ import {
   type FilmSummary,
 } from "@/lib/films.functions";
 import { formatLabel } from "@/lib/film-format";
+import { seriesFacetsQueryOptions } from "@/lib/series.functions";
 import heroImg from "@/assets/hero.jpg";
 
 const searchSchema = z.object({
@@ -64,6 +65,7 @@ export const Route = createFileRoute("/")({
     return Promise.all([
       context.queryClient.ensureQueryData(filmsSearchQueryOptions(params)),
       context.queryClient.ensureQueryData(facetsQueryOptions()),
+      context.queryClient.ensureQueryData(seriesFacetsQueryOptions()),
     ]);
   },
   component: Index,
@@ -104,6 +106,7 @@ function Index() {
   const navigate = useNavigate({ from: "/" });
 
   const facets = useSuspenseQuery(facetsQueryOptions()).data;
+  const seriesFacets = useSuspenseQuery(seriesFacetsQueryOptions()).data;
   const results = useSuspenseQuery(
     filmsSearchQueryOptions({
       q: search.q,
@@ -163,10 +166,15 @@ function Index() {
             A century of South African stories, on one reel.
           </h1>
           <p className="mt-4 max-w-xl text-sm text-muted-foreground sm:text-base">
-            {facets.total} films from 1898 to 2026 — in English, Afrikaans,
-            isiXhosa, isiZulu and more.
-
+            {facets.total} films and {seriesFacets.total} TV series from 1898
+            to 2026 — in English, Afrikaans, isiXhosa, isiZulu and more.
           </p>
+          <Link
+            to="/tv"
+            className="mt-4 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary hover:underline"
+          >
+            Browse the TV vault →
+          </Link>
 
           <form
             className="mt-8 flex max-w-xl items-center gap-2"
