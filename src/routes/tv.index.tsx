@@ -105,7 +105,7 @@ const SORTS = [
 
 function TvIndex() {
   const search = Route.useSearch();
-  const navigate = useNavigate({ from: "/tv" });
+  const navigate = useNavigate({ from: "/tv/" });
 
   const facets = useSuspenseQuery(seriesFacetsQueryOptions()).data;
   const results = useSuspenseQuery(

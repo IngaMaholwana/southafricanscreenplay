@@ -63,3 +63,11 @@ python scripts/publish_to_archive.py ./za-film-db --url http://localhost:8080
   use the published app URL once the project is live (also settable via
   `ARCHIVE_URL`).
 - `--limit N` — send only the first N films, handy for a dry run.
+
+## TV series
+
+```bash
+python scripts/export_series_to_sql.py ./za-tv-db
+# → supabase/migrations/<UTC timestamp>_za_series_data.sql
+```
+Same idea as films: upserts keyed on the series id, then share it with Lovable to load.
