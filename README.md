@@ -14,6 +14,10 @@ This project was created to explore that question by collecting information abou
 
 What began as a small personal experiment became an opportunity to explore data collection, Python automation, database management, and AI-assisted application development.
 
+## Demo link
+
+https://silver-screen-south-africa.lovable.app
+
 ## How It Was Built
 
 The project brought together several technologies and development approaches:
@@ -29,6 +33,9 @@ The project brought together several technologies and development approaches:
 - Discover actors and cast members from local productions.
 - Access information collected through automated data scraping.
 - Browse South African entertainment content through an interactive web interface.
+## Demo link
+
+https://silver-screen-south-africa.lovable.app
 
 ## Technology Stack
 
